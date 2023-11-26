@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Network Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #network {
+            width: 100%;
+            height: 100vh; /* Imposta l'altezza al 100% dell'altezza della finestra */
+        }
+
+        /* Stile per il testo scorrevole */
+        #scroller {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="network"></div>
+
+    <!-- Spazio vuoto -->
+    <div id="empty-space" style="height: 30px;"></div>
+
+
+    <!-- Testo scorrevole -->
+    <div id="scroller">
+        <marquee behavior="scroll" direction="left">Crivellaro</marquee>
+    </div>
+
+    <script type="text/javascript" src="http://20.224.60.135/brain.js"></script>
+
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([
+            { id: 1, label: 'Gestione Nodi' },
+            { id: 2, label: 'Movimento Orizzontale' },
+            { id: 3, label: 'Movimento Verticale' },
+            { id: 4, label: 'Avanti' },
+            { id: 5, label: 'Indietro' },
+            { id: 6, label: 'Destra' },
+            { id: 7, label: 'Sinistra' },            
+            { id: 8, label: 'Video' },
+            { id: 9, label: 'Controllo Vocale' },
+            { id: 10, label: 'Quadrupede/temperatura' },
+              
+            { id: 11, label: 'Alto' },
+            { id: 12, label: 'Medio' },
+            { id: 13, label: 'Basso' },
+            
+            { id: 14, label: 'Sistema.height(120)' },
+            { id: 15, label: 'Sistema.height(90)' },
+            { id: 16, label: 'Sistema.height(60)' },
+            
+            { id: 17, label: 'Sistema.move(0,1,1)' },
+            { id: 18, label: 'Sistema.move(1,-1,-1)' },
+            { id: 19, label: 'Sistema.move(2,1,-1)' },
+            { id: 20, label: 'Sistema.move(2,-1,1)' },
+            
+            { id: 21, label: 'Quadrupede' },
+            { id: 22, label: 'Cpu' },
+            { id: 23, label: 'Microfono-MQTT.py' },
+            { id: 24, label: 'Genero Nodo' },
+
+
+            { id: 25, label: 'Quadrupede/gyro_x' },
+            { id: 26, label: 'Quadrupede/gyro_y' },
+            { id: 27, label: 'Quadrupede/gyro_z' },
+            { id: 28, label: 'Quadrupede/accel_x' },
+            { id: 29, label: 'Quadrupede/accel_y' },
+            { id: 30, label: 'Quadrupede/accel_z' },
+            
+            { id: 31, label: 'Quadrupede/voltage' },
+
+
+            { id: 32, label: 'Robotica Legge 1' },
+            { id: 33, label: 'Robotica Legge 2' },
+            { id: 34, label: 'Robotica Legge 3' },
+            
+        ]);
+
+        var edges = new vis.DataSet([
+            
+            { from: 2, to: 22, arrows: 'to' },
+            { from: 3, to: 22, arrows: 'to' },
+            
+            { from: 1, to: 4, arrows: 'to' },
+            { from: 1, to: 5, arrows: 'to' },
+            { from: 1, to: 6, arrows: 'to' },
+            { from: 1, to: 7, arrows: 'to' },
+            { from: 8, to: 22, arrows: 'to' },
+            { from: 9, to: 22, arrows: 'to' },
+            { from: 23, to: 22, arrows: 'to' },
+            { from: 22, to: 9, arrows: 'to' },
+            { from: 10, to: 24, arrows: 'to' },
+            { from: 1, to: 11, arrows: 'to' },
+            { from: 1, to: 12, arrows: 'to' },
+            { from: 1, to: 13, arrows: 'to' },
+            { from: 11, to: 14, arrows: 'to' },
+            { from: 12, to: 15, arrows: 'to' },
+            { from: 13, to: 16, arrows: 'to' },
+            { from: 4, to: 17, arrows: 'to' },
+            { from: 5, to: 18, arrows: 'to' },
+            { from: 6, to: 19, arrows: 'to' },
+            { from: 7, to: 20, arrows: 'to' },
+            { from: 1, to: 21, arrows: 'to' },
+            
+            { from: 14, to: 21, arrows: 'to' },
+            { from: 15, to: 21, arrows: 'to' },
+            { from: 16, to: 21, arrows: 'to' },
+            { from: 17, to: 21, arrows: 'to' },
+            { from: 18, to: 21, arrows: 'to' },
+            { from: 19, to: 21, arrows: 'to' },
+            { from: 20, to: 21, arrows: 'to' },
+            
+            { from: 2, to: 24, arrows: 'to' },
+            { from: 3, to: 24, arrows: 'to' },
+            { from: 23, to: 24, arrows: 'to' },
+
+            { from: 1, to: 22, arrows: 'to' },
+            { from: 22, to: 1, arrows: 'to' },
+            { from: 24, to: 1, arrows: 'to' },
+
+            { from: 25, to: 24, arrows: 'to' },
+            { from: 26, to: 24, arrows: 'to' },
+            { from: 27, to: 24, arrows: 'to' },
+            { from: 28, to: 24, arrows: 'to' },
+            { from: 29, to: 24, arrows: 'to' },
+            { from: 30, to: 24, arrows: 'to' },
+            { from: 31, to: 24, arrows: 'to' },
+
+            { from: 32, to: 22, arrows: 'to' },
+            { from: 22, to: 32, arrows: 'to' },
+            { from: 33, to: 32, arrows: 'to' },
+            { from: 34, to: 32, arrows: 'to' },
+
+            { from: 32, to: 33, arrows: 'to' },
+            { from: 32, to: 34, arrows: 'to' },
+
+        ]);
+
+        var container = document.getElementById('network');
+        var data = { nodes: nodes, edges: edges };
+        var options = {};
+
+        var network = new vis.Network(container, data, options);
+
+        network.on('click', function (params) {
+            var nodeId = params.nodes[0];
+            if (nodeId) {
+                // Effettua una richiesta POST al server per eseguire lo script Python associato al nodo
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/run_script', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        alert(response.result); // Mostra il risultato dello script o un messaggio di errore
+                    }
+                };
+                xhr.send('node_id=' + nodeId);
+            }
+        });
+    </script>
+</body>
+</html>
